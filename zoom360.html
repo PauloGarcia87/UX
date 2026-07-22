@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+<title>Zoom 360 — Paulo Garcia</title>
+<style>
+  :root{
+    --bg: #2e2e2e;
+    --bg-soft: #383838;
+    --card: #3a3a3a;
+    --text: #ffffff;
+    --muted: #ffffff;
+    --accent: #7c5cff;
+    --accent-2: #35d0ba;
+    --accent-3: #ff6b6b;
+    --lime: #c6ff3d;
+    --ring: rgba(124,92,255,.55);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background-color:#2e2e2e;
+    background-image:
+      linear-gradient(rgba(46,46,46,.78), rgba(46,46,46,.78)),
+      url("bg-tiles.jpg");
+    background-repeat:no-repeat, no-repeat;
+    background-position:center, center;
+    background-size:cover, cover;
+    background-attachment:fixed, fixed;
+    color:var(--text);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  section, header, footer{ position:relative; z-index:1; }
+
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
+  .wrap.narrow{ max-width:760px; margin:0 auto; text-align:left; }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 24px; max-width:1100px; margin:0 auto;
+  }
+  .logo{ font-weight:700; letter-spacing:.5px; font-size:18px; color:#fff; text-decoration:none; }
+  .logo span{ color:var(--lime); }
+  nav ul{ display:flex; gap:32px; list-style:none; }
+  nav a{ color:var(--muted); text-decoration:none; font-size:14px; transition:color .25s; }
+  nav a:hover{ color:var(--lime); }
+
+  /* ---------- Case hero ---------- */
+  .case-hero{ padding:60px 24px 20px; text-align:left; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--muted); text-decoration:none; font-size:14px;
+    opacity:.75; transition:opacity .25s, color .25s;
+    margin-bottom:36px;
+  }
+  .back-link:hover{ opacity:1; color:var(--lime); }
+
+  .eyebrow{
+    color:var(--lime);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .case-hero h1{
+    font-family:'Chakra Petch', sans-serif;
+    font-size:clamp(38px, 7vw, 72px);
+    line-height:1.05;
+    font-weight:700;
+    letter-spacing:-1px;
+    color:#ffffff;
+    max-width:820px;
+  }
+  .case-subtitle{
+    margin-top:22px;
+    max-width:640px;
+    color:var(--muted);
+    opacity:.85;
+    font-size:17px;
+    line-height:1.65;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  .hero-image{
+    width:120%;
+    margin-left:auto;
+    border-radius:18px;
+    overflow:hidden;
+    
+  }
+  .hero-image img{ width:100%; display:block; }
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-image{ width:70%; margin:28px auto 0; }
+  }
+
+  .case-meta{
+    display:flex; flex-wrap:wrap; gap:36px;
+    margin-top:48px;
+    padding-top:36px;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .case-meta-item .label{
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--lime); margin-bottom:8px; font-weight:700;
+  }
+  .case-meta-item .value{
+    font-size:15px; color:var(--text); line-height:1.5; max-width:200px;
+  }
+
+  /* ---------- Content ---------- */
+  .case-content{ padding:100px 0 0; }
+  .case-content h2{
+    font-family:'Chakra Petch', sans-serif;
+    font-size:30px; font-weight:700;
+    color:var(--lime);
+    margin-bottom:20px;
+  }
+  .case-content p{
+    color:var(--muted); opacity:.9;
+    font-size:16px; line-height:1.8;
+    margin-bottom:20px;
+  }
+  .case-block{ margin-bottom:72px; }
+  .case-block ul{
+    list-style:none; display:flex; flex-direction:column; gap:14px;
+    margin-top:8px;
+  }
+  .case-block li{
+    position:relative; padding-left:26px; color:var(--muted); opacity:.9;
+    font-size:16px; line-height:1.7;
+  }
+  .case-block li::before{
+    content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:50%;
+    background:var(--lime);
+    box-shadow:0 0 12px 2px rgba(198,255,61,.5);
+  }
+
+  /* ---------- Process icon grid ---------- */
+  .process-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:56px;
+    row-gap:40px;
+    position:relative;
+    margin-top:8px;
+  }
+  .process-grid::before{
+    content:"";
+    position:absolute;
+    left:50%; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, rgba(198,255,61,0), rgba(198,255,61,.35) 15%, rgba(198,255,61,.35) 85%, rgba(198,255,61,0));
+  }
+  @media (max-width:720px){
+    .process-grid{ grid-template-columns:1fr; }
+    .process-grid::before{ display:none; }
+  }
+  .process-item{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+  }
+  .process-icon{
+    width:52px; height:52px; flex:none;
+    border-radius:12px;
+    object-fit:contain;
+  }
+  .process-item p{
+    color:var(--muted); opacity:.9;
+    font-size:15px; line-height:1.65;
+    margin:0;
+  }
+  .process-item b{
+    color:var(--lime);
+    font-weight:700;
+  }
+
+  /* ---------- Split (image + text, aligned to top) ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .split.reverse .split-image{ order:2; }
+  .split.reverse .split-text{ order:1; }
+  @media (max-width:860px){
+    .split{ grid-template-columns:1fr; }
+    .split.reverse .split-image{ order:1; }
+    .split.reverse .split-text{ order:2; }
+  }
+  .split-image{
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    background:var(--card);
+    width:85%;
+  }
+  .split-image img{ width:100%; display:block; }
+  .split.reverse .split-image{ margin-left:auto; }
+  .split-text h2{ margin-bottom:20px; }
+
+  /* ---------- Full-width supporting image ---------- */
+  .case-visual{ margin-top:0; }
+  .case-visual .visual-inner{
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .case-visual .visual-inner img{ width:100%; display:block; }
+
+  /* ---------- Results (green circles) ---------- */
+  .case-results{ padding:0 0 120px; }
+  .case-results h2{
+    font-family:'Chakra Petch', sans-serif;
+    font-size:44px; font-weight:700; color:#ffffff; margin-bottom:48px;
+  }
+  .stats{
+    display:flex; flex-wrap:wrap; gap:40px;
+  }
+  .stat{
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
+  }
+  .stat-label{
+    color:var(--muted); font-size:15px; line-height:1.4; max-width:160px; text-align:center;
+  }
+  .stat-circle{
+    position:relative;
+    width:92px; height:92px; border-radius:50%;
+    background:transparent;
+    color:#ffffff;
+    font-weight:800; font-size:19px;
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  .stat-circle::before{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:50%;
+    padding:2px;
+    background:conic-gradient(from 0deg, transparent 0deg, var(--lime) 60deg, transparent 130deg, transparent 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    animation:shine-spin 2.2s linear infinite;
+    filter:drop-shadow(0 0 6px rgba(198,255,61,.85));
+  }
+  .stat-circle::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:50%;
+    border:2px solid rgba(198,255,61,.25);
+  }
+  @keyframes shine-spin{ to{ transform:rotate(360deg); } }
+  .stat-circle span{ position:relative; z-index:1; }
+
+  /* ---------- Next project ---------- */
+  .next-project{ padding:0 0 100px; }
+  .next-card{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:40px 32px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.1);
+    background:var(--card);
+    text-decoration:none;
+    color:#fff;
+    transition:transform .35s, border-color .35s, box-shadow .35s;
+  }
+  .next-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--lime);
+    box-shadow:0 10px 30px -10px rgba(198,255,61,.25);
+  }
+  .next-card .next-label{
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--lime); margin-bottom:8px; font-weight:700;
+  }
+  .next-card .next-title{
+    font-family:'Chakra Petch', sans-serif;
+    font-size:26px; font-weight:700;
+  }
+  .next-card .next-arrow{
+    width:44px; height:44px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center;
+    flex:none; font-size:18px;
+    transition:transform .35s, border-color .35s;
+  }
+  .next-card:hover .next-arrow{
+    transform:translateX(6px);
+    border-color:var(--lime);
+    color:var(--lime);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center; padding:60px 24px 80px; color:var(--muted); font-size:13px;
+  }
+  footer a{ color:#ffffff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.25); transition:color .25s, border-color .25s; }
+  footer a:hover{ color:var(--lime); border-color:var(--lime); }
+  .footer-contact{
+    display:flex; justify-content:center; gap:28px; flex-wrap:wrap;
+    margin-bottom:18px; font-size:15px;
+  }
+
+  @media (max-width:640px){
+    .next-card{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="index.html">Paulo<span>.</span>Garcia</a>
+  <nav>
+    <ul>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="case-hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html#work">&larr; Back to work</a>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Case Study</div>
+        <h1>Zoom 360</h1>
+        <p class="case-subtitle">Redesigning a social learning network where kids learn using Lego toys — turning a barely-used platform with almost no features into an engaging, gamified experience for students, teachers and parents.</p>
+
+        <div class="stats" style="margin-top:36px;">
+          <div class="stat">
+            <div class="stat-circle"><span>7min</span></div>
+            <div class="stat-label">Increase in access time, from 40 seconds to a peak of 7 minutes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-circle"><span>20k</span></div>
+            <div class="stat-label">Increase in the number of users, from 15,000 to 20,000</div>
+          </div>
+        </div>
+
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <div class="label">Role</div>
+            <div class="value">UX/UI Designer</div>
+          </div>
+         
+          <div class="case-meta-item">
+            <div class="label">Audience</div>
+            <div class="value">Students, teachers &amp; parents</div>
+          </div>
+          <div class="case-meta-item">
+            <div class="label">Focus</div>
+            <div class="value">Engagement &amp; retention</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="laptop.png" alt="Interface do Zoom 360 exibida em um laptop">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-content">
+  <div class="wrap">
+
+    <div class="case-block">
+      <h2>Overview</h2>
+      <p>Zoom 360 is a social learning network for kids to learn using Lego toys. The old design had almost no features, so the average time was just 15 seconds. The platform had the potential for 45 thousand users, but only 15 thousand used it.</p>
+    </div>
+
+    <div class="case-block">
+      <h2>Challenge</h2>
+      <p>Redesign and ideate new features for Zoom 360 to increase the number of users and time spent using the platform.</p>
+      <ul>
+        <li>Low engagement — the old design had almost no features and sessions lasted only seconds.</li>
+        <li>Untapped potential — thousands of registered users simply weren't coming back to the platform.</li>
+        <li>A sensitive audience — every new feature had to consider the emotional impact on children, especially around competition and rankings.</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <h2>Process</h2>
+      <div class="process-grid">
+        <div class="process-item">
+          <img class="process-icon" src="reuniao_1.png" alt="Ícone de reunião">
+          <p><b>Meeting with stakeholders</b> to understand the entire context in which Zoom 360 finds itself, the objectives, limitations and collect previously produced data.</p>
+        </div>
+        <div class="process-item">
+          <img class="process-icon" src="mapa-mental_1.png" alt="Ícone de mapa mental">
+          <p><b>Users' journey</b> both of children and teachers. After all, what would be the impact of yet another tool on the lives of teachers who already have a large workload?</p>
+        </div>
+        <div class="process-item">
+          <img class="process-icon" src="professor_1.png" alt="Ícone de professora">
+          <p><b>Meeting</b> with company's teachers and psychologists to understand the impacts of some ideas presented at the previous meeting on early childhood education and psychology.</p>
+        </div>
+        <div class="process-item">
+          <img class="process-icon" src="wireframe_1.png" alt="Ícone de wireframe">
+          <p><b>Wireframes</b> for ideation and stakeholders approval and prototypes for developers.</p>
+        </div>
+        <div class="process-item">
+          <img class="process-icon" src="garoto_1.png" alt="Ícone de persona">
+          <p><b>Personas</b> were created according to data collected from Zoom to be as assertive as possible when creating the solution.</p>
+        </div>
+        <div class="process-item">
+          <img class="process-icon" src="statistics_1.png" alt="Ícone de análise de dados">
+          <p><b>Data analysis</b> Carrying out usability tests with children is a very big challenge, which requires, in addition to specific skills with the public, parental approval, so we were only able to analyze the data after the changes for evaluation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <h2>Solution</h2>
+      <p>The redesign centered on two pillars: a clearer timeline that surfaces students' work and progress, and a gamification layer that rewards achievement without publicly punishing anyone at the bottom of the ranking.</p>
+
+      <div class="split" style="margin-top:44px;">
+        <div class="split-image">
+          <img src="timeline.png" alt="Tela de timeline do Zoom 360">
+        </div>
+        <div class="split-text">
+          <h2>Timeline</h2>
+          <p>The timeline shows the students' work, and to earn medals they need to take completed challenges. There, teachers also post additional classes, explanations about the challenge and it is also shown whether the student won a medal.</p>
+        </div>
+      </div>
+
+      <div class="split reverse" style="margin-top:72px;">
+        <div class="split-image">
+          <img src="badges.png" alt="Tela de gamificação, badges e ranking do Zoom 360">
+        </div>
+        <div class="split-text">
+          <h2>Gamification</h2>
+          <p>One of the concerns regarding gamification was the psychological impact on children who occupy last positions. To overcome this problem, it was decided that the ranking would only show the top 5 placed.</p>
+        </div>
+      </div>
+
+      <div class="case-visual" style="margin-top:72px;">
+        <h2 style="color:var(--lime);">Final Result</h2>
+        <div class="visual-inner" style="width:70%; margin:0 auto;">
+          <img src="final.png" alt="Telas finais do Zoom 360 com anotações do processo de design">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="next-project">
+  <div class="wrap">
+    <a class="next-card" href="space.html">
+      <div>
+        <div class="next-label">Next Project</div>
+        <div class="next-title">Space</div>
+      </div>
+      <div class="next-arrow">&rarr;</div>
+    </a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-contact">
+    <a href="mailto:paulo.garcia1987@gmail.com">paulo.garcia1987@gmail.com</a>
+    <a href="https://www.linkedin.com/in/paulogarciaux/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <div>© 2026 Paulo Garcia — UX/UI Designer.</div>
+</footer>
+
+</body>
+</html>
