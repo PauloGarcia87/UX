@@ -23,14 +23,7 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background-color:#2e2e2e;
-    background-image:
-      linear-gradient(rgba(46,46,46,.78), rgba(46,46,46,.78)),
-      url("bg-tiles.jpg");
-    background-repeat:no-repeat, no-repeat;
-    background-position:center, center;
-    background-size:cover, cover;
-    background-attachment:fixed, fixed;
+    background-color:#191919;
     color:var(--text);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x:hidden;
@@ -42,24 +35,28 @@
 
   .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
 
-  /* ---------- Nav ---------- */
-  header.nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:28px 24px; max-width:1100px; margin:0 auto;
-  }
-  .logo{ font-weight:700; letter-spacing:.5px; font-size:18px; }
-  .logo span{ color:var(--accent); }
-  nav ul{ display:flex; gap:32px; list-style:none; }
-  nav a{ color:var(--muted); text-decoration:none; font-size:14px; transition:color .25s; }
-  nav a:hover{ color:var(--text); }
-
   /* ---------- Hero ---------- */
   .hero{
     text-align:left;
-    padding:70px 24px 40px;
+    width:100%;
+    height:100vh;
+    margin:0;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    background-image:
+      linear-gradient(90deg, rgba(20,20,20,.94) 0%, rgba(20,20,20,.82) 35%, rgba(20,20,20,.35) 62%, rgba(20,20,20,.05) 78%, rgba(20,20,20,0) 100%),
+      url("bg-final.png");
+    background-repeat:no-repeat, no-repeat;
+    background-position:center, top right;
+    background-size:cover, cover;
+  }
+  @media (max-width:720px){
+    .hero{ align-items:flex-start; padding-top:60px; }
   }
   .hero .wrap{
     display:flex; flex-direction:column; align-items:flex-start;
+    width:100%;
   }
   .eyebrow{
     color:var(--lime);
@@ -70,37 +67,16 @@
     margin-bottom:14px;
   }
   .hero h1{
-    font-size:clamp(48px, 9vw, 108px);
+    font-size:clamp(40px, 6vw, 68px);
     line-height:.95;
     font-weight:800;
     letter-spacing:-2px;
     color:#ffffff;
   }
 
-  /* Circular portrait with lime stroke */
-  .portrait-wrap{
-    position:relative;
-    width:220px; height:220px;
-    margin:46px 0 10px;
-  }
-  .portrait{
-    position:relative; z-index:1;
-    width:100%; height:100%;
-    border-radius:50%;
-    overflow:hidden;
-    border:4px solid var(--lime);
-    background:
-      radial-gradient(circle at 35% 30%, #3a3f52, #14161d 70%);
-    display:flex; align-items:center; justify-content:center;
-    font-size:70px; font-weight:800; color:var(--text);
-  }
-  .portrait img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
-
   /* ---------- Bio bullets ---------- */
   .bio{
-    max-width:640px; margin:50px 0 0; padding:0; text-align:left;
+    max-width:640px; margin:0 0 0; padding:0; text-align:left;
   }
   .bio ul{ list-style:none; display:flex; flex-direction:column; gap:18px; text-align:left; }
   .bio li{
@@ -155,7 +131,7 @@
   .stat-circle span{ position:relative; z-index:1; }
 
   /* ---------- Companies ---------- */
-  .companies{ padding:110px 0 40px; text-align:left; }
+  .companies{ padding:50px 0 50px; text-align:left; background-color: #262626; }
   .companies h2{
     font-family:'Chakra Petch', sans-serif;
     font-size:44px;
@@ -203,7 +179,7 @@
   .logo-chip:hover{ opacity:1; transform:translateY(-2px); }
 
   /* ---------- Work grid ---------- */
-  .work{ padding:120px 0 140px; }
+  .work{ padding:90px 0 140px; }
   .work-head{ text-align:left; margin-bottom:64px; }
   .work-head h2{
     font-family:'Chakra Petch', sans-serif;
@@ -311,34 +287,14 @@
 </head>
 <body>
 
-<header class="nav">
-  <div class="logo">Paulo<span>.</span>Garcia</div>
-  <nav>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
 <section class="hero" id="about">
   <div class="wrap">
     <div class="eyebrow">UX / UI Designer</div>
     <h1>Paulo Garcia</h1>
 
-    <div class="portrait-wrap">
-      <div class="portrait">
-        <img src="profile.png" alt="Foto de Paulo Garcia">
-      </div>
-    </div>
 
-    <div class="bio">
-      <ul>
-        <li><b>Bachelor's Degree in Digital Interface Design</b> from Senac. Awarded a 100% scholarship through the ENEM (National Exam) program.</li>
-        <li><b>Postgraduate Degree in UX Research</b> at UNIFATEC.</li>
-      </ul>
-    </div>
+
+    
 
     <div class="stats">
       <div class="stat">
