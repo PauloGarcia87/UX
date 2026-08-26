@@ -23,7 +23,11 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background-color:#191919;
+    background-image:
+      radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,.7) 82%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0, rgba(255,255,255,.045) 1px, transparent 1px, transparent 58px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0, rgba(255,255,255,.045) 1px, transparent 1px, transparent 58px);
+    background-color: #070502;
     color:var(--text);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x:hidden;
@@ -39,39 +43,60 @@
   .hero{
     text-align:left;
     width:100%;
-    height:100vh;
+    min-height:100vh;
     margin:0;
     overflow:hidden;
     display:flex;
     align-items:center;
+    padding:140px 0 80px;
+    background-color:#070502;
     background-image:
-      linear-gradient(90deg, rgba(20,20,20,.94) 0%, rgba(20,20,20,.82) 35%, rgba(20,20,20,.35) 62%, rgba(20,20,20,.05) 78%, rgba(20,20,20,0) 100%),
-      url("Header-Kobra.png");
-    background-repeat:no-repeat, no-repeat;
-    background-position:center, top right;
-    background-size:cover, cover;
+      radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,.7) 82%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0, rgba(255,255,255,.045) 1px, transparent 1px, transparent 58px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0, rgba(255,255,255,.045) 1px, transparent 1px, transparent 58px);
   }
   @media (max-width:720px){
-    .hero{ align-items:flex-start; padding-top:60px; }
+    .hero{ padding:120px 0 60px; }
   }
-  .hero .wrap{
+  .hero .wrap{ width:100%; }
+  .hero-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:64px;
+  }
+  .hero-left{
+    flex:1 1 520px;
+    max-width:640px;
     display:flex; flex-direction:column; align-items:flex-start;
-    width:100%;
   }
   .eyebrow{
     color:var(--lime);
     letter-spacing:3px;
     text-transform:uppercase;
-    font-size:18px;
+    font-size:14px;
     font-weight:700;
-    margin-bottom:14px;
+    margin-bottom:16px;
   }
   .hero h1{
-    font-size:clamp(40px, 6vw, 68px);
-    line-height:.95;
+    font-family:'Chakra Petch', sans-serif;
+    font-size:clamp(90px, 4.6vw, 56px);
+    line-height:1.08;
     font-weight:800;
-    letter-spacing:-2px;
+    letter-spacing:-1.5px;
     color:#ffffff;
+  }
+  .hero-subtitle{
+    margin-top:26px;
+    max-width:560px;
+    color:var(--muted);
+    opacity:.75;
+    font-size:25px;
+    line-height:1.7;
+  }
+  @media (max-width:960px){
+    .hero-wrap{ flex-direction:column; align-items:flex-start; }
+    .hero-left{ max-width:none; }
   }
 
   /* ---------- Bio bullets ---------- */
@@ -88,6 +113,58 @@
     box-shadow:0 0 14px 3px rgba(198,255,61,.5);
   }
   .bio li b{ color:var(--text); font-weight:600; }
+
+  /* ---------- Hero visual (spheres image, right side) ---------- */
+  .hero-right{
+    position:relative;
+    flex:1 1 420px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+  }
+  .hero-right::before{
+    content:"";
+    position:absolute;
+    top:48%; left:50%;
+    width:150%; height:150%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(255,196,90,.18), rgba(255,196,90,.08) 40%, transparent 68%);
+    filter:blur(34px);
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero-spheres{
+    position:relative;
+    z-index:1;
+    width:clamp(300px, 32vw, 460px);
+    animation:spheres-float 6s ease-in-out infinite;
+  }
+  .hero-spheres img{
+    width:100%; height:auto; display:block;
+  }
+  @keyframes spheres-float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-14px); }
+  }
+
+  .node-badge{
+    position:relative; z-index:1;
+    padding:14px 26px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:40px;
+    font-family:'Chakra Petch', sans-serif;
+    font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700;
+    color:var(--lime);
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    white-space:nowrap;
+  }
+  @media (max-width:960px){
+    .hero-right{ margin-top:20px; }
+  }
+
 
   /* ---------- Stats ---------- */
   .stats{
@@ -131,7 +208,7 @@
   .stat-circle span{ position:relative; z-index:1; }
 
   /* ---------- Companies ---------- */
-  .companies{ padding:50px 0 50px; text-align:left; background-color: #262626; }
+  .companies{ padding:50px 0 50px; text-align:left; background-color: #0e0e0e; }
   .companies h2{
     font-family:'Chakra Petch', sans-serif;
     font-size:44px;
@@ -302,26 +379,22 @@
 
 <section class="hero" id="about">
   <div class="wrap">
-    <div class="eyebrow">UX / UI Designer</div>
-    <h1>Paulo Garcia</h1>
+    <div class="hero-wrap">
 
-
-
-    
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-circle"><span>11</span></div>
-        <div class="stat-label">Years of experience</div>
+      <div class="hero-left">
+        <div class="eyebrow">UX / UI with a focus on AI</div>
+        <h1>Paulo Garcia</h1>
+        <p class="hero-subtitle">Strategy, data and AI integrated to create high-impact products.</p>
       </div>
-      <div class="stat">
-        <div class="stat-circle"><span>100%</span></div>
-        <div class="stat-label">Scholarship</div>
+
+      <div class="hero-right">
+        <div class="hero-spheres">
+          <img src="esferas-cobre.png" alt="Esferas de vidro douradas com estatísticas: 11 anos de experiência, 100% de bolsa de estudos, 10 trabalhos de conclusão de curso">
+        </div>
+
+        <div class="node-badge">A.I, Data and Strategy</div>
       </div>
-      <div class="stat">
-        <div class="stat-circle"><span>10</span></div>
-        <div class="stat-label">Undergraduate thesis</div>
-      </div>
+
     </div>
   </div>
 </section>
